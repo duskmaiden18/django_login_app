@@ -1,0 +1,43 @@
+body {
+	background-image: url("../images/bg.jpg");
+	background-size: cover;
+	font-family: 'Times New Roman';
+	margin:auto;
+}
+
+.container {
+	width: 100%;
+	max-width: 1320px;
+	margin: 35px auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.intro_header {
+	text-align: right;
+	color: #FFF;
+	font-size: 13pt;
+}
+
+#logout {
+	border-radius: 10px;
+	border: 2px solid #FFF;
+	padding: 1px 10px;
+	text-align: center;
+}
+
+.intro_info {
+	text-align: center;
+}
+
+.intro_info p {
+	color: #FFF;
+	font-size: 35pt;
+	padding-top: 190px;
+}
+
+
+

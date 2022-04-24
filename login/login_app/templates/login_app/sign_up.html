@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" type="text/css" href="../../static/css/style_sign_up.css">
+</head>
+<body>
+    <div class="intro">
+        <div class="container">
+            <div class="intro_info">
+                <p>Sign up</p>
+                {% if form.errors %}
+                    <div id="form_errors">
+                        <p>Errors:</p>
+                        {{ form.errors }}
+                    </div>
+                {% endif %}
+                <div>
+                <form action="{% url 'login_app:sign_up' %}" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <div class="input_item">
+                        <div class="help_img">
+                            {{ field.label_tag }}
+                            {% if field.help_text %}
+                            <img id="{{ field.label }}" src="../../static/images/help.png">
+                            <div id="{{ field.label }}_help" class="disabled">{{ field.help_text }}</div>
+                            {% endif %}
+                        </div>
+                        {{ field }}
+                    </div>
+<!--                    <div class="input_item">-->
+<!--                    <label for="email">Email</label>-->
+<!--                    <input type="text" id="email" name="email">-->
+<!--                    </div>-->
+<!--                    <div class="input_item">-->
+<!--                    <label>Password</label>-->
+<!--                    <input type="password" name="password">-->
+<!--                    </div>-->
+<!--                    <div class="input_item">-->
+<!--                    <label>Confirm password</label>-->
+<!--                    <input type="password" name="Confirm password">-->
+<!--                    </div>-->
+                    {% endfor %}
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+<script src="../../static/js/sign_up.js"></script>
+</body>
+</html>

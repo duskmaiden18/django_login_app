@@ -1,0 +1,48 @@
+body {
+	background-image: url("../images/bg.jpg");
+	background-size: cover;
+	font-family: 'Times New Roman';
+	margin:auto;
+}
+
+.container {
+	width: 100%;
+	max-width: 1320px;
+	margin: 35px auto;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+.intro_header {
+	float: right;
+	display: flex;
+	color: #FFF;
+	font-size: 14pt;
+}
+
+#sign_up {
+	border-radius: 10px;
+	border: 2px solid #FFF;
+	margin-left: 20px;
+	width: 75px;
+	text-align: center;
+}
+
+.intro_info {
+	text-align: center;
+}
+
+.intro_info p {
+	color: #FFF;
+	margin-top: -250px;
+	font-size: 17pt;
+}
+
+.intro_info img {
+	margin-left: 160px;
+}
+
+
