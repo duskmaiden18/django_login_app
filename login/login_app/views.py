@@ -7,8 +7,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import EmailMessage
-from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import login
+from django.contrib.auth.tokens import default_token_generator
 
 from django.http import HttpResponse
 
@@ -36,7 +36,7 @@ def sign_up(request):
                 'user': user,
                 'domain': current_site.domain,
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-                'token': PasswordResetTokenGenerator(),
+                'token': default_token_generator.make_token(user),
             })
             to_email = form.cleaned_data.get('email')
             email = EmailMessage(
@@ -46,7 +46,8 @@ def sign_up(request):
             return render(request, 'login_app/sign_up_success.html')
         else:
             form = UserCreationForm(request.POST)
-            form.add_error('email', 'not valid')
+            form.add_error('email', 'Email is not valid')
+            print(form.errors)
             return render(request, 'login_app/sign_up.html', context={'form': form})
 
 def activate(request, uidb64, token):
@@ -55,7 +56,7 @@ def activate(request, uidb64, token):
         user = User.objects.get(pk=uid)
     except(TypeError, ValueError, OverflowError, User.DoesNotExist):
         user = None
-    if user is not None and PasswordResetTokenGenerator.check_token(user, token):
+    if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
         login(request, user)
