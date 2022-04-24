@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Logged</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/style_logged.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_logged.css' %}">
 </head>
 <body>
     <div class="intro">
@@ -13,7 +14,7 @@
             </div>
             <div class="intro_info">
                 <p>You are logged in with email <br>
-                «zikzak200015@gmail.com»</p>
+                «{{ user.email }}»</p>
             </div>
         </div>
     </div>

@@ -46,8 +46,6 @@ def sign_up(request):
             return render(request, 'login_app/sign_up_success.html')
         else:
             form = UserCreationForm(request.POST)
-            form.add_error('email', 'Email is not valid')
-            print(form.errors)
             return render(request, 'login_app/sign_up.html', context={'form': form})
 
 def activate(request, uidb64, token):
@@ -60,9 +58,8 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        # return redirect('home')
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        return render(request, 'login_app/logged.html', context={'user': user})
     else:
-        return HttpResponse('Activation link is invalid!')
+        return render(request, 'login_app/invalid_token.html')
 
 
