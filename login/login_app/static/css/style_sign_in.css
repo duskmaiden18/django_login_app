@@ -57,6 +57,10 @@ form input[type=submit] {
 	border: none;
 }
 
+form input[type=submit]:hover {
+    cursor: pointer;
+}
+
 .input_item {
 	margin-left: 60px;
 }
@@ -71,6 +75,24 @@ form input[type=submit] {
 	font-size: 12pt;
 	font-family: "Times New Roman";
 	border: none;
+}
+
+#form_errors {
+    width: 330px;
+    border-radius: 10px;
+    border: 1px solid #343434;
+    padding: 0 15px;
+    display: inline;
+    position: absolute;
+    margin-left: -400px;
+    margin-top: 0px;
+    background-color: #222222;
+    color: #fff;
+}
+
+#form_errors p {
+    font-size: 14pt;
+    color: #ff0000;
 }
 
 

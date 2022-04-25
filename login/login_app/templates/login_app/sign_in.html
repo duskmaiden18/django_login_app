@@ -10,16 +10,21 @@
         <div class="container">
             <div class="intro_info">
                 <p>Sign in</p>
+                {% if form.errors %}
+                    <div id="form_errors">
+                        <p>Errors:</p>
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
                 <div>
-                <form action="#">
+                <form action="{% url 'login_app:sign_in' %}" method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
                     <div class="input_item">
-                    <label for="email">Email</label>
-                    <input type="text" id="email" name="email">
+                        {{ field.label_tag }}
+                        {{ field }}
                     </div>
-                    <div class="input_item">
-                    <label>Password</label>
-                    <input type="password" name="password">
-                    </div>
+                    {% endfor %}
                     <input type="submit" value="Submit">
                 </form>
             </div>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Success</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/style_logged.css">
+    <title>Not active</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_logged.css' %}">
 </head>
 <body>
     <div class="intro">
@@ -12,8 +13,8 @@
                 <a href="{% url 'login_app:index' %}" id="logout">Home</a>
             </div>
             <div class="intro_info">
-                <p>Your registration is almost done! <br>
-                Please, check your mail and confirm your email</p>
+                <p>Your email is not confirmed. <br>
+                    Please, check your mail for confirmation</p>
             </div>
         </div>
     </div>

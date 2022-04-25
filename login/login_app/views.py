@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -7,13 +8,8 @@ from django.template.loader import render_to_string
 from django.utils.encoding import force_bytes, force_str
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.core.mail import EmailMessage
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.tokens import default_token_generator
-
-from django.http import HttpResponse
-
-
-# Create your views here.
 
 def index(request):
     return render(request, 'login_app/index.html')
@@ -61,5 +57,34 @@ def activate(request, uidb64, token):
         return render(request, 'login_app/logged.html', context={'user': user})
     else:
         return render(request, 'login_app/invalid_token.html')
+
+def sign_in(request):
+
+    if request.method == "GET":
+        form = AuthenticationForm()
+        return render(request, 'login_app/sign_in.html', context={'form': form})
+
+    elif request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            user = authenticate(username=cd['username'], password=cd['password'])
+            if user is not None:
+                if user.is_active:
+                    login(request, user)
+                    return render(request, 'login_app/logged.html')
+                else:
+                    return render(request, 'login_app/not_active_acc.html')
+            else:
+                form = AuthenticationForm(request, data=request.POST)
+                return render(request, 'login_app/sign_in.html', context={'form': form})
+        else:
+            form = AuthenticationForm(request, data=request.POST)
+            return render(request, 'login_app/sign_in.html', context={'form': form})
+
+def log_out(request):
+    logout(request)
+    return redirect('login_app:index')
+
 
 
