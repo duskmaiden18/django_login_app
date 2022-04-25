@@ -11,6 +11,8 @@ from django.core.mail import EmailMessage
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.tokens import default_token_generator
 
+from django.contrib.auth.decorators import login_required
+
 def index(request):
     return render(request, 'login_app/index.html')
 
@@ -54,7 +56,7 @@ def activate(request, uidb64, token):
         user.is_active = True
         user.save()
         login(request, user)
-        return render(request, 'login_app/logged.html', context={'user': user})
+        return redirect('login_app:logged')
     else:
         return render(request, 'login_app/invalid_token.html')
 
@@ -72,7 +74,7 @@ def sign_in(request):
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    return render(request, 'login_app/logged.html')
+                    return redirect('login_app:logged')
                 else:
                     return render(request, 'login_app/not_active_acc.html')
             else:
@@ -82,9 +84,15 @@ def sign_in(request):
             form = AuthenticationForm(request, data=request.POST)
             return render(request, 'login_app/sign_in.html', context={'form': form})
 
+@login_required
 def log_out(request):
     logout(request)
     return redirect('login_app:index')
+
+@login_required
+def logged(request):
+    user = request.user
+    return render(request, 'login_app/logged.html', context={"user": user})
 
 
 

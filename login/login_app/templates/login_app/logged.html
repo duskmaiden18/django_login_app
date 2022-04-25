@@ -13,8 +13,9 @@
                 <a href="{% url 'login_app:log_out' %}" id="logout">Logout</a>
             </div>
             <div class="intro_info">
-                <p>You are logged in with email <br>
-                «{{ user.email }}»</p>
+                <p>You are logged in! <br>
+                Username: {{ user }} <br>
+                Email: {{ user.email }}</p>
             </div>
         </div>
     </div>
