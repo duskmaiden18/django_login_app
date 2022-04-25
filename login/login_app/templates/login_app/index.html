@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/style_index.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_index.css' %}">
 </head>
 <body>
     <div class="intro">
@@ -13,7 +14,7 @@
                 <a href="{% url 'login_app:sign_up' %}" id="sign_up">Sign up</a>
             </div>
             <div class="intro_info">
-                <img src="../../static/images/logo.png">
+                <img src="{% static 'images/logo.png' %}">
                 <p>app for registration and authentication</p>
             </div>
         </div>

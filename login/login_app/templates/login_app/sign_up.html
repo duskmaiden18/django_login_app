@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sign up</title>
-    <link rel="stylesheet" type="text/css" href="../../static/css/style_sign_up.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_sign_up.css' %}">
 </head>
 <body>
     <div class="intro">
@@ -24,7 +25,7 @@
                         <div class="help_img">
                             {{ field.label_tag }}
                             {% if field.help_text %}
-                            <img id="{{ field.label }}" src="../../static/images/help.png">
+                            <img id="{{ field.label }}" src="{% static 'images/help.png' %}">
                             <div id="{{ field.label }}_help" class="disabled">{{ field.help_text }}</div>
                             {% endif %}
                         </div>
